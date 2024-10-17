@@ -11,3 +11,74 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input[type="checkbox"] {
+  appearance: none;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  border: 3px solid rgb(78, 168, 222);
+  
+}
+
+input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  font-size: 26px;
+  overflow: hidden;
+  color: white;
+  background-image: url('check.svg');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+input[type="checkbox"]:checked::after {
+  width: 30px;
+  height: 30px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: rgb(94, 96, 206);
+  border: none;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  background-color: pink;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+h1 {
+  color: rgb(78, 168, 222);
+  font-weight: 900;
+  font-size: 40px;
+  text-align: center;
+}
+
+h1 span {
+  color: rgb(94, 96, 206);
+}
+
+li button {
+  width: 24px;
+  height: 24px;
+  background-color: rgb(38, 38, 38);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+.edit {
+  background-image: url('edit.svg');
+   
+}
+
+.remove {
+  background-image: url('trash.svg');
+}
