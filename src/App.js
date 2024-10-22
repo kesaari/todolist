@@ -1,79 +1,224 @@
-import logo from './logo.svg';
+import TodoList from './TodoList';
 import './App.css';
 import { Component } from 'react';
 
-function App() {
-  return ( <div className='conteiner'>
-    <Header />
-    <TaskList />
-  </div>
+// class App extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       todos: this.getLocalStorage(),
+//       inputValue: '',
+//       filter: 'all',
+//       editingId: null,
+//       editingText: ''
+//     };
+//   }
+
+//   getLocalStorage() {
+//     const todos = localStorage.getItem('todos');
+//     return todos ? JSON.parse(todos) : [];
+//   }
+  
+//   updateLocalStorage(todos) {
+//     localStorage.setItem('todos', JSON.stringify(todos))
+//   }
+
+//   addTodo = (event) => {
+//     event.preventDefault();
+//     if (this.state.inputValue) {
+//       const newTodos = {
+//         id: Date.now(),
+//         text: this.state.inputValue,
+//         completed: false,
+//         createdAt: new Date(),
+//       };
+
+//       this.setState((prevState) => {
+//         const updatedTasks = [...prevState.todos, newTodos];
+//         this.updateLocalStorage(updatedTasks);
+//         console.log(prevState);
+//         return { todos: updatedTasks, inputValue: '' };
+
+//       });
+//     }
+
     
-  );
+//   };
+
+//   completeTodo = (id) => {
+//     this.setState((prevState) => {
+//       const updatedTasks = prevState.todos.map((task) =>
+//         task.id === id ? { ...task, completed: !task.completed } : task
+//       );
+//       this.updateLocalStorage(updatedTasks);
+//       return { todos: updatedTasks };
+//     });
+//   };
+
+//   deleteTodo = (id) => {
+//     this.setState((prevState) => {
+//       const updatedTasks = prevState.todos.filter((task) => task.id !== id);
+//       this.updateLocalStorage(updatedTasks);
+//       return { todos: updatedTasks };
+//     });
+//   };
+
+//   setFilter = (filter) => {
+//     this.setState({ filter });
+//   };
+
+//   editTodo = (id) => {
+//     const task = this.state.todos.find((task) => task.id === id);
+//     if (task) {
+//       this.setState({ editingId: id, editingText: task.text });
+//     }
+//   };
+
+//   render() {
+//     const filteredTodos = this.state.todos.filter(todo => {
+//       if (this.state.filter === 'all') return true;
+//       if (this.state.filter === 'completed') return todo.completed;
+//       return !todo.completed;
+//     });
+
+//     return (
+      
+
+//       <div className="App">
+//         <form onSubmit={this.addTodo}>
+//           <input value={this.state.inputValue} onChange={(event) => this.setState({ inputValue: event.target.value })} />
+//           <button type="submit">Add Todo</button>
+//         </form>
+//         <button onClick={() => this.setFilter('all')}>Все</button>
+//         <button onClick={() => this.setFilter('incompleted')}>Текущие</button>
+//         <button onClick={() => this.setFilter('completed')}>Выполненные</button>
+//         <TodoList 
+//         todos={filteredTodos} 
+//         completeTodo={this.completeTodo} 
+//         deleteTodo={this.deleteTodo} 
+//         editTodo={this.editTodo}/>
+//       </div>
+//     );
+//   }
+// }
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: this.getLocalStorage(),
+      inputValue: '',
+      filter: 'all',
+      editingId: null,
+      editingText: ''
+    };
+  }
+
+  getLocalStorage() {
+    const todos = localStorage.getItem('todos');
+    return todos ? JSON.parse(todos) : [];
+  }
+
+  updateLocalStorage(todos) {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
+  addTodo = (event) => {
+    event.preventDefault();
+    if (this.state.inputValue) {
+      const newTodo = {
+        id: Date.now(),
+        text: this.state.inputValue,
+        completed: false,
+        createdAt: new Date(),
+      };
+
+      this.setState((prevState) => {
+        const updatedTodos = [...prevState.todos, newTodo];
+        this.updateLocalStorage(updatedTodos);
+        return { todos: updatedTodos, inputValue: '' };
+      });
+    }
+  };
+
+  completeTodo = (id) => {
+    this.setState((prevState) => {
+      const updatedTodos = prevState.todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      );
+      this.updateLocalStorage(updatedTodos);
+      return { todos: updatedTodos };
+    });
+  };
+
+  deleteTodo = (id) => {
+    this.setState((prevState) => {
+      const updatedTodos = prevState.todos.filter((todo) => todo.id !== id);
+      this.updateLocalStorage(updatedTodos);
+      return { todos: updatedTodos };
+    });
+  };
+
+  setFilter = (filter) => {
+    this.setState({ filter });
+  };
+
+  editTodo = (id) => {
+    const todo = this.state.todos.find((todo) => todo.id === id);
+    if (todo) {
+      this.setState({ editingId: id, editingText: todo.text });
+    }
+  };
+
+  saveEditedTodo = (id, text) => {
+    this.setState((prevState) => {
+      const updatedTodos = prevState.todos.map((todo) =>
+        todo.id === id ? { ...todo, text } : todo
+      );
+      this.updateLocalStorage(updatedTodos);
+      return { todos: updatedTodos, editingId: null, editingText: '' };
+    });
+  };
+
+  render() {
+    const filteredTodos = this.state.todos.filter(todo => {
+      if (this.state.filter === 'all') return true;
+      if (this.state.filter === 'completed') return todo.completed;
+      return !todo.completed;
+    });
+
+    return (
+      <div className="app">
+        <h1>to<span>do</span></h1>
+        <div className='content'>
+        <form onSubmit={this.addTodo}>
+          <input className='input' value={this.state.inputValue} onChange={(event) => this.setState({ inputValue: event.target.value })} placeholder='Добавить новую задачу...'/>
+          <button type="submit">Добавить
+          </button>
+        </form>
+        <div className='filter'>
+        <button onClick={() => this.setFilter('all')}>Все задачи</button>
+        <button onClick={() => this.setFilter('completed')}>Завершенные</button>
+        <button onClick={() => this.setFilter('incomplete')}>В процессе</button>
+        </div>
+        <TodoList
+          todos={filteredTodos}
+          completeTodo={this.completeTodo}
+          deleteTodo={this.deleteTodo}
+          editTodo={this.editTodo}
+          saveEditedTodo={this.saveEditedTodo}
+          editingId={this.state.editingId}
+          editingText={this.state.editingText}
+        />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
 
-class Header extends Component {
-  render() {
-    return( 
-      <div className='header'>
-      <h1>to<span>do</span></h1>
-      <Input />
-      <AddButton />
-    </div>)
-  }
-}
-class Input extends Component {
-  render() {
-    return (
-      <input placeholder='Добавить новую задачу...' className='input'></input>
-    )
-  }
-
-  createTask() {
-
-  }
-}
-
-class AddButton extends Component {
-  render() {
-    return (
-      <button className='addButton'>Добавить</button>
-    )
-  }
-}
-
-let list = [
-  {
-    title: 'Попить пива',
-    id: 1
-  },
-  {
-    title: 'Сходить в зал',
-    id: 2
-  },
-  {
-    title: 'Строить зоопарки',
-    id: 3
-  },
-  {
-    title: 'Начать учиться',
-    id: 4
-  }
-]
 
 
-class TaskList extends Component {
-  render() {
-    const listItems = list.map((item) => (
-      <li key={item.id}>
-        <input type='checkbox' />
-        {item.title}
-        <button className='edit' />
-        <button className='remove' />
-        </li>
-  ));
-  
-  return <ul>{listItems}</ul>;
-  }
-}
+
+
