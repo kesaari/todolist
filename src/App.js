@@ -180,12 +180,20 @@ class App extends Component {
     });
   };
 
+  deleteCompletedTodos = () => {
+    this.setState((prevState) => {
+      const updatedTodos = prevState.todos.filter((todo) => !todo.completed);
+      this.updateLocalStorage(updatedTodos);
+      return { todos: updatedTodos };
+    });
+  };
+
   render() {
     const filteredTodos = this.state.todos.filter(todo => {
       if (this.state.filter === 'all') return true;
       if (this.state.filter === 'completed') return todo.completed;
       return !todo.completed;
-    });
+    }).sort((a, b) => a.completed - b.completed);
 
     return (
       <div className="app">
@@ -196,11 +204,27 @@ class App extends Component {
           <button type="submit">Добавить
           </button>
         </form>
+
         <div className='filter'>
-        <button onClick={() => this.setFilter('all')}>Все задачи</button>
-        <button onClick={() => this.setFilter('completed')}>Завершенные</button>
-        <button onClick={() => this.setFilter('incomplete')}>В процессе</button>
+        <button 
+        className={this.state.filter === 'all' ? 'active' : false}
+        onClick={() => this.setFilter('all')}>Все задачи</button>
+        <button 
+        className={this.state.filter === 'completed' ? 'active' : ''}
+        onClick={() => this.setFilter('completed')}>Завершенные</button>
+        {this.state.filter === 'completed' && (
+          <button className='clearBtn active' onClick={this.deleteCompletedTodos}>Очистить</button>
+        )}
+        <button 
+        className={this.state.filter === 'incomplete' ? 'active' : ''}
+        onClick={() => this.setFilter('incomplete')}>В процессе</button>
         </div>
+
+        <div className='statistics'>
+          <div>Всего задач<span className='counter'>{this.state.todos.length}</span></div>
+          <div>Завершено задач<span className='counter'>{this.state.todos.filter(task => task.completed).length} из {this.state.todos.length}</span></div>
+        </div>
+
         <TodoList
           todos={filteredTodos}
           completeTodo={this.completeTodo}

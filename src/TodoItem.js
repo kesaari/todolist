@@ -89,12 +89,13 @@ class TodoItem extends Component {
                 value={this.state.inputValue}
                 onChange={(event) => this.setState({ inputValue: event.target.value })}
                 onKeyDown={this.handleKeyDown}
+                className='todo'
               />
               <button className="edit" onClick={this.handleSave}></button>
             </>
           ) : (
             <>
-              {this.props.text}
+              <span className='todo' onClick={() => this.props.editTodo(this.props.id)}>{this.props.text}</span>
               <button className="edit" onClick={() => this.props.editTodo(this.props.id)}></button>
             </>
           )}

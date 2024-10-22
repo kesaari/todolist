@@ -6,7 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(26, 26, 26);
-  width: 100vw
+  width: 100vw;
+  background-image: linear-gradient(rgb(13, 13, 13) 140px, rgb(26, 26, 26) 140px);
+  height: 100vh;
 }
 
 *, *::before, *::after {
@@ -31,7 +33,7 @@ input[type="checkbox"] {
   height: 30px;
   border-radius: 50px;
   border: 3px solid rgb(78, 168, 222);
-  
+  margin-left: 20px;
 }
 
 input[type="checkbox"]::after {
@@ -115,7 +117,7 @@ li button {
 
 .edit {
   background-image: url('edit.svg');
-   
+  margin-left: 20px;
 }
 
 .remove {
@@ -169,11 +171,12 @@ form button::after {
   justify-content: flex-start;
   gap: 16px;
   margin-top: 16px;
+  position: relative;
 }
 
 .filter button {
   border-radius: 8px;
-  background-color: rgb(30, 111, 159);
+  background-color: rgba(30, 46, 69, 1);
   color: white;
   height: 36px;
   border: none;
@@ -185,7 +188,7 @@ input::placeholder {
   font-size: 16px;
 }
 
-.input:focus-visible {
+input:focus-visible {
   outline: none;
   
 }
@@ -197,4 +200,45 @@ input::placeholder {
 .input {
   padding-left: 15px;
   font-size: 16px;
+}
+
+.statistics {
+  color: rgb(78, 168, 222);
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.counter {
+  color: white;
+  background-color: rgb(51, 51, 51);
+  display: inline-block;
+  text-align: center;
+  padding: 2px 8px 2px 8px;
+  border-radius: 999px;
+  margin-left: 8px;
+}
+
+li input {
+  border: none;
+  border-bottom: rgb(255, 255, 255) 1px solid;
+  background-color: rgb(38, 38, 38);
+  color: white;
+  font-size: 14px;
+}
+
+.todo {
+  width: 80%;
+  margin-left: 15px;
+}
+
+.active {
+  background-color: rgb(30, 111, 159)  !important;
+}
+
+.clearBtn {
+  position: absolute;
+  left: 86.5%;
+  width: 100px;
 }
