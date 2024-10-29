@@ -30,6 +30,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "style": "prettier --write {src,test}/**/* ./*.{json,*.json} !package-lock.json -u --no-error-on-unmatched-pattern"
   },
   "eslintConfig": {

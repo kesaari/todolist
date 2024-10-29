@@ -1,8 +1,10 @@
 import { Component } from "react";
 
-import TodoList from "./TodoList";
-
-import "./App.css";
+import { TodoList } from "./comp/TodoList";
+import { Header } from "./comp/Header";
+import { Form } from "./comp/Form";
+import { Statistics } from "./comp/Statistics";
+import { FilterButtons } from "./comp/FilterButtons";
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class App extends Component {
   getLocalStorage() {
     const todos = localStorage.getItem("todos");
     return todos ? JSON.parse(todos) : [];
-  };
+  }
 
   updateLocalStorage = (todos) => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -80,6 +82,10 @@ class App extends Component {
     this.setState({ todos: updatedTodos });
   };
 
+  setInputValue = (value) => {
+    this.setState({ inputValue: value });
+  };
+
   render() {
     const filteredTodos = this.state.todos
       .filter((todo) => {
@@ -91,60 +97,21 @@ class App extends Component {
 
     return (
       <div className="app">
-        <h1>
-          to<span>do</span>
-        </h1>
+        <Header />
         <div className="content">
-          <form onSubmit={this.addTodo}>
-            <input
-              className="input"
-              value={this.state.inputValue}
-              onChange={(event) =>
-                this.setState({ inputValue: event.target.value })
-              }
-              placeholder="Добавить новую задачу..."
-            />
-            <button type="submit">Добавить</button>
-          </form>
+          <Form
+            addTodo={this.addTodo}
+            inputValue={this.state.inputValue}
+            setInputValue={this.setInputValue}
+          />
 
-          <div className="filter">
-            <button
-              className={this.state.filter === "all" ? "active" : false}
-              onClick={() => this.setFilter("all")}>
-              Все задачи
-            </button>
-            <button
-              className={this.state.filter === "completed" ? "active" : ""}
-              onClick={() => this.setFilter("completed")}>
-              Завершенные
-            </button>
-            {this.state.filter === "completed" && (
-              <button
-                className="clearBtn active"
-                onClick={this.deleteCompletedTodos}>
-                Очистить
-              </button>
-            )}
-            <button
-              className={this.state.filter === "incomplete" ? "active" : ""}
-              onClick={() => this.setFilter("incomplete")}>
-              В процессе
-            </button>
-          </div>
+          <FilterButtons
+            filter={this.state.filter}
+            setFilter={this.setFilter}
+            deleteCompletedTodos={this.deleteCompletedTodos}
+          />
 
-          <div className="statistics">
-            <div>
-              Всего задач
-              <span className="counter">{this.state.todos.length}</span>
-            </div>
-            <div>
-              Завершено задач
-              <span className="counter">
-                {this.state.todos.filter((task) => task.completed).length} из{" "}
-                {this.state.todos.length}
-              </span>
-            </div>
-          </div>
+          <Statistics todos={this.state.todos} />
 
           <TodoList
             todos={filteredTodos}

@@ -21,7 +21,12 @@
   },
   "plugins": ["react", "prettier", "import"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "linebreak-style": [0, "unix"],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
@@ -30,7 +35,14 @@
     "import/order": [
       2,
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
         "newlines-between": "always"
       }
     ]
