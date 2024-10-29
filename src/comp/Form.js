@@ -1,7 +1,8 @@
 import { Component } from "react";
 
 class Form extends Component {
-  handleInputChange = (event) => {
+  
+  handleInput = (event) => {
     this.props.setInputValue(event.target.value);
   };
 

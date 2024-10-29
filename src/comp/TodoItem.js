@@ -24,8 +24,8 @@ class TodoItem extends Component {
   };
 
   handleSave = () => {
-    this.setState({ editing: false });
     this.props.saveEditedTodo(this.props.id, this.state.inputValue);
+    this.setState({ editing: false });
   };
 
   handleKeyDown = (event) => {
@@ -42,7 +42,7 @@ class TodoItem extends Component {
     this.setState({ visibilityTooltip: false });
   };
 
-  handleInputChange = (event) => {
+  handleInput = (event) => {
     this.setState({ inputValue: event.target.value });
   };
 
