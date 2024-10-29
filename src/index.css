@@ -1,8 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(26, 26, 26);
@@ -11,13 +10,14 @@ body {
   height: 100vh;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-size: border-box;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .content {
@@ -26,7 +26,7 @@ code {
   margin: 0 auto;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   appearance: none;
   position: relative;
   width: 30px;
@@ -34,10 +34,11 @@ input[type="checkbox"] {
   border-radius: 50px;
   border: 3px solid rgb(78, 168, 222);
   margin-left: 20px;
+  cursor: pointer;
 }
 
-input[type="checkbox"]::after {
-  content: "";
+input[type='checkbox']::after {
+  content: '';
   position: absolute;
   width: 0px;
   height: 0px;
@@ -50,12 +51,12 @@ input[type="checkbox"]::after {
   background-position: center;
 }
 
-input[type="checkbox"]:checked::after {
+input[type='checkbox']:checked::after {
   width: 30px;
   height: 30px;
 }
 
-input[type="checkbox"]:checked {
+input[type='checkbox']:checked {
   background-color: rgb(94, 96, 206);
   border: none;
 }
@@ -80,9 +81,9 @@ li {
 }
 
 h1 {
-  color: rgb(78, 168, 222);
-  font-weight: 900;
-  font-size: 40px;
+  color: rgb(78, 168, 222) !important;
+  font-weight: 900 !important;
+  font-size: 40px !important;
   text-align: center;
   background-color: rgb(13, 13, 13);
   display: flex;
@@ -135,7 +136,7 @@ form input {
   border: rgb(13, 13, 13);
   height: 54px;
   border-radius: 8px;
-  width: 70%
+  width: 70%;
 }
 
 form {
@@ -163,7 +164,6 @@ form button::after {
   width: 16px;
   height: 16px;
   display: inline-block;
-  
 }
 
 .filter {
@@ -190,11 +190,10 @@ input::placeholder {
 
 input:focus-visible {
   outline: none;
-  
 }
 
-.input:focus::placeholder { 
-  opacity: 0; 
+.input:focus::placeholder {
+  opacity: 0;
 }
 
 .input {
@@ -229,16 +228,30 @@ li input {
 }
 
 .todo {
-  width: 80%;
+  width: 77.5%;
   margin-left: 15px;
+  cursor: pointer;
 }
 
 .active {
-  background-color: rgb(30, 111, 159)  !important;
+  background-color: rgb(30, 111, 159) !important;
 }
 
 .clearBtn {
   position: absolute;
   left: 86.5%;
   width: 100px;
+}
+
+.tooltip_cont {
+  width: 80%;
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  color: rgb(128, 128, 128);
+  background-color: rgb(255, 255, 255);
+  padding: 0 5px 0 5px;
+  left: 40%;
 }

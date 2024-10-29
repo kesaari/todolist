@@ -1,17 +1,6 @@
-import React, { Component } from 'react';
-import TodoItem from './TodoItem';
+import { Component } from "react";
 
-// class TodoList extends Component {
-//     render() {
-//       return (
-//         <ul>
-//           {this.props.todos.map((todo) => (
-//             <TodoItem key={todo.id} index={todo.id} todo={todo.text} completeTodo={this.props.completeTodo} deleteTodo={this.props.deleteTodo} editTodo={this.props.editTodo} completed={todo.completed}/>
-//           ))}
-//         </ul>
-//       );
-//     }
-//   }
+import TodoItem from "./TodoItem";
 
 class TodoList extends Component {
   render() {
@@ -22,6 +11,7 @@ class TodoList extends Component {
             key={todo.id}
             id={todo.id}
             text={todo.text}
+            birthDate={todo.birthDate}
             completeTodo={this.props.completeTodo}
             deleteTodo={this.props.deleteTodo}
             editTodo={this.props.editTodo}
@@ -35,5 +25,5 @@ class TodoList extends Component {
     );
   }
 }
-  
-  export default TodoList;
+
+export default TodoList;
