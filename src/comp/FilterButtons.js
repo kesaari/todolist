@@ -1,6 +1,7 @@
 import { Component } from "react";
 
 class FilterButtons extends Component {
+  
   handleFilter = (value) => () => {
     this.props.setFilter(value);
   };

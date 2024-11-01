@@ -21,7 +21,7 @@ class App extends Component {
   getLocalStorage() {
     const todos = localStorage.getItem("todos");
     return todos ? JSON.parse(todos) : [];
-  }
+  };
 
   updateLocalStorage = (todos) => {
     localStorage.setItem("todos", JSON.stringify(todos));
