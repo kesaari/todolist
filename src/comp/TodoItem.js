@@ -62,7 +62,7 @@ class TodoItem extends Component {
     return (
       <li className={this.props.completed ? "done" : ""}>
         <input
-          onClick={this.handleStatus(this.props.id)}
+          onChange={this.handleStatus(this.props.id)}
           type="checkbox"
           checked={this.props.completed}
         />

@@ -2,7 +2,7 @@ import { Component } from "react";
 
 import { TodoList } from "./comp/TodoList";
 import { Header } from "./comp/Header";
-import { Form } from "./comp/Form";
+// import { Form } from "./comp/Form";
 import { Statistics } from "./comp/Statistics";
 import { FilterButtons } from "./comp/FilterButtons";
 
@@ -79,7 +79,7 @@ class App extends Component {
   deleteCompletedTodos = () => {
     const updatedTodos = this.state.todos.filter((todo) => !todo.completed);
     this.updateLocalStorage(updatedTodos);
-    this.setState({ todos: updatedTodos });
+    this.setState({ todos: updatedTodos, filter: "all" });
   };
 
   setInputValue = (value) => {
@@ -99,11 +99,24 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="content">
-          <Form
+
+        <form onSubmit={this.addTodo}>
+            <input
+              className="input"
+              value={this.state.inputValue}
+              onChange={(event) =>
+                this.setState({ inputValue: event.target.value })
+              }
+              placeholder="Добавить новую задачу..."
+            />
+            <button type="submit">Добавить</button>
+          </form>
+
+          {/* <Form
             addTodo={this.addTodo}
             inputValue={this.state.inputValue}
             setInputValue={this.setInputValue}
-          />
+          /> */}
 
           <FilterButtons
             filter={this.state.filter}
