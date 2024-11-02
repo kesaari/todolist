@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 
 class Statistics extends Component {
   render() {
@@ -19,5 +20,10 @@ class Statistics extends Component {
     );
   }
 }
+
+Statistics.propTypes = {
+  todos: PropTypes.object
+};
+
 
 export { Statistics };

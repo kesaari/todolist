@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 
 class FilterButtons extends Component {
   
@@ -38,6 +39,12 @@ class FilterButtons extends Component {
       </div>
     );
   }
-}
+};
+
+FilterButtons.propTypes = {
+  filter: PropTypes.string,
+  setFilter: PropTypes.func,
+  deleteCompletedTodos: PropTypes.func
+};
 
 export { FilterButtons };

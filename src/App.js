@@ -1,10 +1,11 @@
 import { Component } from "react";
 
-import { TodoList } from "./comp/TodoList";
+// import { TodoList } from "./comp/TodoList";
 import { Header } from "./comp/Header";
-// import { Form } from "./comp/Form";
+import { Form } from "./comp/Form";
 import { Statistics } from "./comp/Statistics";
 import { FilterButtons } from "./comp/FilterButtons";
+import { TodoItem } from "./comp/TodoItem";
 
 class App extends Component {
   constructor(props) {
@@ -100,23 +101,11 @@ class App extends Component {
         <Header />
         <div className="content">
 
-        <form onSubmit={this.addTodo}>
-            <input
-              className="input"
-              value={this.state.inputValue}
-              onChange={(event) =>
-                this.setState({ inputValue: event.target.value })
-              }
-              placeholder="Добавить новую задачу..."
-            />
-            <button type="submit">Добавить</button>
-          </form>
-
-          {/* <Form
+          <Form
             addTodo={this.addTodo}
             inputValue={this.state.inputValue}
             setInputValue={this.setInputValue}
-          /> */}
+          />
 
           <FilterButtons
             filter={this.state.filter}
@@ -126,15 +115,23 @@ class App extends Component {
 
           <Statistics todos={this.state.todos} />
 
-          <TodoList
-            todos={filteredTodos}
+          <ul>
+          {filteredTodos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            text={todo.text}
+            birthDate={todo.birthDate}
             completeTodo={this.completeTodo}
             deleteTodo={this.deleteTodo}
             editTodo={this.editTodo}
             saveEditedTodo={this.saveEditedTodo}
-            editingId={this.state.editingId}
-            editingText={this.state.editingText}
+            completed={todo.completed}
+            editingId={this.editingId}
+            editingText={this.editingText}
           />
+        ))}
+          </ul>
         </div>
       </div>
     );

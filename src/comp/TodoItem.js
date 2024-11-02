@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
+import PropTypes from 'prop-types';
 
 class TodoItem extends Component {
   constructor(props) {
@@ -24,8 +25,8 @@ class TodoItem extends Component {
   };
 
   handleSave = () => {
-    this.props.saveEditedTodo(this.props.id, this.state.inputValue);
     this.setState({ editing: false });
+    this.props.saveEditedTodo(this.props.id, this.state.inputValue);
   };
 
   handleKeyDown = (event) => {
@@ -55,6 +56,7 @@ class TodoItem extends Component {
   };
 
   edit = (id) => () => {
+    this.setState({ editing: true })
     this.props.editTodo(id);
   };
 
@@ -70,7 +72,7 @@ class TodoItem extends Component {
           <>
             <input
               value={this.state.inputValue}
-              onChange={this.handleInputChange}
+              onChange={this.handleInput}
               onKeyDown={this.handleKeyDown}
               onBlur={this.handleSave}
               className="todo"
@@ -108,6 +110,25 @@ class TodoItem extends Component {
       </li>
     );
   }
+}
+
+TodoItem.defaultProps = {
+  editing: null,
+  inputValue: '',
+  visibilityTooltip: false,
+};
+
+TodoItem.propTypes = {
+  id: PropTypes.number,
+  text: PropTypes.string,
+  birthDate: PropTypes.string,
+  completeTodo: PropTypes.func,
+  deleteTodo: PropTypes.func,
+  editTodo: PropTypes.func,
+  saveEditedTodo: PropTypes.func,
+  completed: PropTypes.bool,
+  editingId: PropTypes.number,
+  editingText: PropTypes.string
 }
 
 export { TodoItem };
