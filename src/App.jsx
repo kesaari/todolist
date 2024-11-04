@@ -1,6 +1,4 @@
 import { Component } from "react";
-
-// import { TodoList } from "./comp/TodoList";
 import { Header } from "./comp/Header";
 import { Form } from "./comp/Form";
 import { Statistics } from "./comp/Statistics";
@@ -116,21 +114,28 @@ class App extends Component {
           <Statistics todos={this.state.todos} />
 
           <ul>
-          {filteredTodos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            id={todo.id}
-            text={todo.text}
-            birthDate={todo.birthDate}
-            completeTodo={this.completeTodo}
-            deleteTodo={this.deleteTodo}
-            editTodo={this.editTodo}
-            saveEditedTodo={this.saveEditedTodo}
-            completed={todo.completed}
-            editingId={this.editingId}
-            editingText={this.editingText}
-          />
-        ))}
+          {filteredTodos.map(todo => {
+            const { id, text, birthDate, completed } = todo;
+            const methods = {
+              completeTodo: this.completeTodo,
+              deleteTodo: this.deleteTodo,
+              editTodo: this.editTodo,
+              saveEditedTodo: this.saveEditedTodo,
+              editingId: this.state.editingId,
+              editingText: this.state.editingText,
+            };
+
+            return (
+              <TodoItem
+                key={id}
+                id={id}
+                text={text}
+                birthDate={birthDate}
+                completed={completed}
+                {...methods}
+              />
+            );
+          })}
           </ul>
         </div>
       </div>

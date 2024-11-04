@@ -61,12 +61,17 @@ class TodoItem extends Component {
   };
 
   render() {
+
+    const todo = this.props;
+
     return (
-      <li className={this.props.completed ? "done" : ""}>
+      <li
+      key={todo.id}
+      className={todo.completed ? "done" : ""}>
         <input
-          onChange={this.handleStatus(this.props.id)}
+          onChange={this.handleStatus(todo.id)}
           type="checkbox"
-          checked={this.props.completed}
+          checked={todo.completed}
         />
         {this.state.editing ? (
           <>
@@ -85,26 +90,23 @@ class TodoItem extends Component {
               onMouseEnter={this.show}
               onMouseLeave={this.hide}
             >
-              <div className="todo" onClick={this.edit(this.props.id)}>
-                {this.props.text}
-                {this.state.visibilityTooltip && (
+              <div className="todo" onClick={this.edit(todo.id)}>
+                {todo.text}
+                {this.state.visibilityTooltip ? (
                   <div className="tooltip">
-                    {formatDistanceToNow(new Date(this.props.birthDate), {
+                    {formatDistanceToNow(new Date(todo.birthDate), {
                       addSuffix: true,
                       locale: ru
                     })}
-                  </div>
-                )}
+                  </div>) :null}
               </div>
             </div>
           </>
         )}
-        {!this.props.completed && (
-          <button className="edit" onClick={this.edit(this.props.id)}></button>
-        )}
+        {!todo.completed ? (<button className="edit" onClick={this.edit(todo.id)}></button>) : null}
         <button
           className="remove"
-          onClick={this.delete(this.props.id)}
+          onClick={this.delete(todo.id)}
         ></button>
         <div></div>
       </li>
