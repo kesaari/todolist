@@ -8,11 +8,12 @@ class Form extends Component {
   };
 
   render() {
+    const { addTodo, inputValue } = this.props
     return (
-      <form onSubmit={this.props.addTodo}>
+      <form onSubmit={addTodo}>
         <input
           className="input"
-          value={this.props.inputValue}
+          value={inputValue}
           onChange={this.handleInput}
           placeholder="Добавить новую задачу..."
         />

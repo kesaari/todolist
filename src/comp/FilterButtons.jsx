@@ -5,8 +5,8 @@ class FilterButtons extends Component {
 
   buttons = [
     { value: "all", text: "Все задачи"},
-    { value: "incomplete", text: "В процессе"},
-    { value: "completed", text: "Завершенные", function: this.props.deleteCompletedTodos}
+    { value: "completed", text: "Завершенные"},
+    { value: "incomplete", text: "В процессе"}
   ]
   
   handleFilter = (value) => () => {
@@ -14,20 +14,21 @@ class FilterButtons extends Component {
   };
 
   render() {
+    const { filter, deleteCompletedTodos } = this.props
     return (
       <div className="filter">
         {this.buttons.map((button) => (
           <button
           key={button.value}
-          className={this.props.filter === button.value ? "active" : ""}
+          className={filter === button.value ? "active" : ""}
           onClick={this.handleFilter(button.value)}>
             {button.text}
           </button>
         ))}
-        {this.props.filter === "completed" ?
+        {filter === "completed" ?
           <button
           className="clearBtn active"
-          onClick={this.props.deleteCompletedTodos}>Очистить</button> : null}
+          onClick={deleteCompletedTodos}>Очистить</button> : null}
       </div>
     );
   }

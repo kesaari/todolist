@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 
 class Statistics extends Component {
   render() {
+    const todos = this.props.todos;
+    const counter = todos.length
     return (
       <div className="statistics">
         <div>
           Всего задач
-          <span className="counter">{this.props.todos.length}</span>
+          <span className="counter">{counter}</span>
         </div>
         <div>
           Завершено задач
           <span className="counter">
-            {this.props.todos.filter((todo) => todo.completed).length} из{" "}
-            {this.props.todos.length}
+            {todos.filter((todo) => todo.completed).length} из{" "} {counter}
           </span>
         </div>
       </div>

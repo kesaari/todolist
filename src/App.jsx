@@ -35,25 +35,31 @@ class App extends Component {
         completed: false,
         birthDate: new Date()
       };
-
-      const updatedTodos = [...this.state.todos, newTodo];
-      this.updateLocalStorage(updatedTodos);
-      this.setState({ todos: updatedTodos, inputValue: "" });
+  
+      this.setState((prev) => {
+        const updatedTodos = [...prev.todos, newTodo];
+        this.updateLocalStorage(updatedTodos);
+        return { todos: updatedTodos, inputValue: "" };
+      });
     }
   };
 
   completeTodo = (id) => {
-    const updatedTodos = this.state.todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-    this.updateLocalStorage(updatedTodos);
-    this.setState({ todos: updatedTodos });
+    this.setState((prev) => {
+      const updatedTodos = prev.todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      );
+      this.updateLocalStorage(updatedTodos);
+      return { todos: updatedTodos };
+    });
   };
 
   deleteTodo = (id) => {
-    const updatedTodos = this.state.todos.filter((todo) => todo.id !== id);
-    this.updateLocalStorage(updatedTodos);
-    this.setState({ todos: updatedTodos });
+    this.setState((prev) => {
+      const updatedTodos = prev.todos.filter((todo) => todo.id !== id);
+      this.updateLocalStorage(updatedTodos);
+      return { todos: updatedTodos };
+    });
   };
 
   setFilter = (filter) => {
@@ -61,24 +67,30 @@ class App extends Component {
   };
 
   editTodo = (id) => {
-    const todo = this.state.todos.find((todo) => todo.id === id);
-    if (todo) {
-      this.setState({ editingId: id, editingText: todo.text });
-    }
+    this.setState((prev) => {
+      const todo = prev.todos.find((todo) => todo.id === id);
+      if (todo) {
+        return { editingId: id, editingText: todo.text };
+      }
+    });
   };
 
   saveEditedTodo = (id, text) => {
-    const updatedTodos = this.state.todos.map((todo) =>
-      todo.id === id ? { ...todo, text } : todo
-    );
-    this.updateLocalStorage(updatedTodos);
-    this.setState({ todos: updatedTodos, editingId: null, editingText: "" });
+    this.setState((prev) => {
+      const updatedTodos = prev.todos.map((todo) =>
+        todo.id === id ? { ...todo, text } : todo
+      );
+      this.updateLocalStorage(updatedTodos);
+      return { todos: updatedTodos, editingId: null, editingText: "" };
+    });
   };
 
   deleteCompletedTodos = () => {
-    const updatedTodos = this.state.todos.filter((todo) => !todo.completed);
-    this.updateLocalStorage(updatedTodos);
-    this.setState({ todos: updatedTodos, filter: "all" });
+    this.setState((prev) => {
+      const updatedTodos = prev.todos.filter((todo) => !todo.completed);
+      this.updateLocalStorage(updatedTodos);
+      return { todos: updatedTodos, filter: "all" };
+    });
   };
 
   setInputValue = (value) => {
@@ -107,8 +119,8 @@ class App extends Component {
 
           <FilterButtons
             filter={this.state.filter}
-            setFilter={this.setFilter}
             deleteCompletedTodos={this.deleteCompletedTodos}
+            setFilter={this.setFilter}
           />
 
           <Statistics todos={this.state.todos} />
